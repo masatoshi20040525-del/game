@@ -26,17 +26,60 @@ export default function SpeakerPage({ params }: { params: Promise<{ roomId: stri
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>ヒントを送信（カタカナor半角英数字）</h1>
+    <div
+      style={{
+        padding: 24,
+        maxWidth: 500,
+        margin: "0 auto",
+        fontSize: "20px",
+        lineHeight: "1.8",
+      }}
+    >
+      <h1 style={{ fontSize: "28px", marginBottom: 20 }}>
+        ヒントを送信（カタカナ or 半角英数字）
+      </h1>
 
       <input
         value={hint}
         onChange={(e) => setHint(e.target.value)}
         placeholder="ヒントを書いて送信"
-        style={{ width: "300px" }}
+        style={{
+          width: "100%",
+          padding: "14px 16px",
+          fontSize: "20px",
+          borderRadius: "10px",
+          border: "2px solid #4a90e2",  // ← ★ 枠の色変更
+          marginBottom: "20px",
+          outline: "none",
+
+          // フォーカス時の青枠を再現（inlineで擬似クラス使えないため工夫）
+          boxShadow: hint
+            ? "0 0 6px rgba(74,144,226,0.5)"
+            : "none",
+        }}
       />
 
-      <button onClick={sendHint}>送信</button>
+      <button
+        onClick={sendHint}
+        style={{
+          width: "100%",
+          padding: "14px 16px",
+          fontSize: "22px",
+          fontWeight: "bold",
+          background: "#4a90e2",     // ← ★ 塗りつぶし色
+          color: "white",
+          border: "none",
+          borderRadius: "10px",
+          cursor: "pointer",
+
+          // ホバー表現（inlineで擬似クラス不可 → 反転しない安全な補助）
+          transition: "background 0.2s",
+        }}
+        onMouseOver={(e) => (e.currentTarget.style.background = "#2d6ac7")}
+        onMouseOut={(e) => (e.currentTarget.style.background = "#4a90e2")}
+      >
+        送信
+      </button>
     </div>
   );
 }
