@@ -10,6 +10,7 @@ export default function PublicViewPage({
 }: {
   params: Promise<{ roomId: string }>;
 }) {
+  // 🔥 Next.js 16 では params は Promise → use() で unwrap 必須
   const { roomId } = use(params);
 
   const [hints, setHints] = useState<string[]>([]);
